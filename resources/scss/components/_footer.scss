@@ -60,6 +60,10 @@
             gap: $spacing-sm;
             text-align: center;
         }
+
+        @media (max-width: $bp-xs) {
+            padding: $spacing-sm 0;
+        }
     }
 
     &__totop {

@@ -52,6 +52,10 @@ ul, ol {
     max-width: $container-max;
     margin: 0 auto;
     padding: 0 $container-pad;
+
+    @media (max-width: $bp-xs) {
+        padding: 0 0.75rem; // 12px — libera 24px extras em telas de 320px
+    }
 }
 
 // ─── Helpers de texto ─────────────────────────────────────────────────────────

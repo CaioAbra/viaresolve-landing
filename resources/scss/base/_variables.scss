@@ -70,6 +70,7 @@ $transition-base:   0.25s ease;
 $transition-slow:   0.4s ease;
 
 // ─── Breakpoints ─────────────────────────────────────────────────────────────
+$bp-xs:  360px;  // telas muito pequenas (320–360px)
 $bp-sm:  576px;
 $bp-md:  768px;
 $bp-lg:  1024px;

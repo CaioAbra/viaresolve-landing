@@ -80,16 +80,18 @@
                 <div class="stats__icon">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                <span
-                    class="stats__number js-countup"
-                    data-value="{{ $val }}"
-                    data-prefix="{{ $prefix }}"
-                    data-suffix="{{ $suffix }}"
-                    data-format="{{ $format }}"
-                    data-duration="1800"
-                    aria-label="{{ $num }}"
-                >{{ $num }}</span>
-                <span class="stats__label">{{ $label }}</span>
+                <div class="stats__info">
+                    <span
+                        class="stats__number js-countup"
+                        data-value="{{ $val }}"
+                        data-prefix="{{ $prefix }}"
+                        data-suffix="{{ $suffix }}"
+                        data-format="{{ $format }}"
+                        data-duration="1800"
+                        aria-label="{{ $num }}"
+                    >{{ $num }}</span>
+                    <span class="stats__label">{{ $label }}</span>
+                </div>
             </div>
             @endforeach
         </div>

@@ -2,6 +2,7 @@
 // ─── About ────────────────────────────────────────────────────────────────────
 .about {
     padding: $spacing-4xl 0;
+    overflow-x: hidden;
     background: $color-white;
 
     &__grid {
@@ -56,12 +57,14 @@
             margin-top: 2px;
 
             &--yellow {
-                background: rgba(245, 158, 11, 0.1);
+                overflow-x: hidden;
+    background: rgba(245, 158, 11, 0.1);
                 color: $color-yellow;
             }
 
             &--blue {
-                background: rgba(37, 99, 235, 0.1);
+                overflow-x: hidden;
+    background: rgba(37, 99, 235, 0.1);
                 color: $color-primary;
             }
         }
@@ -84,6 +87,12 @@
         margin-top: $spacing-xl;
         padding-top: $spacing-xl;
         border-top: 1px solid $color-gray-200;
+
+        // 320px: 3 colunas ficam espremidas — vai para 2+1
+        @media (max-width: $bp-xs) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: $spacing-sm;
+        }
     }
 
     &__number-item {
