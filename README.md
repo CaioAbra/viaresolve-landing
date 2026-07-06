@@ -21,15 +21,15 @@ Landing page institucional com painel de leads para assessoria de trânsito.
 
 ### Hero — acima da dobra
 
-![Hero section](docs/screenshots/01-hero.jpg)
+![Hero section](C:/Users/terc.caio.abra_g4edu/Documents/Projects/viaresolve-landing/docs/screenshots/01-hero.jpg)
 
 ### Landing completa
 
-![Landing page](docs/screenshots/02-landing-full.jpg)
+![Landing page](C:/Users/terc.caio.abra_g4edu/Documents/Projects/viaresolve-landing/docs/screenshots/02-landing-full.jpg)
 
 ### Formulário de contato e footer
 
-![Contact e Footer](docs/screenshots/03-contact-footer.jpg)
+![Contact e Footer](C:/Users/terc.caio.abra_g4edu/Documents/Projects/viaresolve-landing/docs/screenshots/03-contact-footer.jpg)
 
 ---
 
