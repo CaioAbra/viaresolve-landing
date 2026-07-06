@@ -1,58 +1,220 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ViaResolve — Landing Page
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Landing page institucional com painel de leads para assessoria de trânsito.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Camada | Tecnologia |
+|--------|-----------|
+| Backend | Laravel 12 + PHP 8.4 |
+| Templates | Blade |
+| Banco | SQLite (arquivo local) |
+| CSS | SCSS modular (sem Tailwind) |
+| Build | Vite 5 |
+| Mail | Log driver (fake/desenvolvimento) |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Screenshots
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Hero — acima da dobra
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![Hero section](docs/screenshots/01-hero.jpg)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Landing completa
 
-## Agentic Development
+![Landing page](docs/screenshots/02-landing-full.jpg)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Formulário de contato e footer
 
-```bash
-composer require laravel/boost --dev
+![Contact e Footer](docs/screenshots/03-contact-footer.jpg)
 
-php artisan boost:install
+---
+
+## Estrutura do projeto
+
+```
+viaresolve-landing/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── LandingController.php        # index + submit do formulário
+│   │   │   └── Admin/
+│   │   │       └── LeadsController.php      # CRUD do painel admin
+│   │   ├── Middleware/
+│   │   │   └── AdminAuth.php                # Guard de sessão simples
+│   │   └── Requests/
+│   │       └── LeadFormRequest.php          # Validação do formulário
+│   ├── Mail/
+│   │   └── LeadReceived.php                 # Notificação por e-mail
+│   └── Models/
+│       └── Lead.php                         # Model com status labels
+│
+├── database/
+│   ├── database.sqlite                      # Banco SQLite local
+│   └── migrations/
+│       └── 2026_07_06_..._create_leads_table.php
+│
+├── resources/
+│   ├── js/
+│   │   └── app.js                           # AOS, countup, navbar, máscara tel.
+│   ├── scss/
+│   │   ├── app.scss                         # Entry point da landing
+│   │   ├── admin.scss                       # Entry point do painel admin
+│   │   ├── base/
+│   │   │   ├── _variables.scss
+│   │   │   ├── _reset.scss
+│   │   │   └── _animations.scss
+│   │   └── components/
+│   │       ├── _navbar.scss
+│   │       ├── _hero.scss
+│   │       ├── _stats.scss
+│   │       ├── _solutions.scss
+│   │       ├── _about.scss
+│   │       ├── _ticker.scss
+│   │       ├── _problem.scss
+│   │       ├── _testimonials.scss
+│   │       ├── _contact.scss
+│   │       ├── _footer.scss
+│   │       └── _buttons.scss
+│   └── views/
+│       ├── layouts/app.blade.php
+│       ├── landing/index.blade.php
+│       ├── admin/
+│       │   ├── login.blade.php
+│       │   └── leads/index.blade.php
+│       └── emails/lead-received.blade.php
+│
+├── routes/web.php
+├── vite.config.js
+└── .env
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Como rodar
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 1. Pré-requisitos
 
-## Code of Conduct
+- PHP 8.2+
+- Composer
+- Node.js 20+
+- npm
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 2. Instalar dependências
 
-## Security Vulnerabilities
+```bash
+composer install
+npm install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 3. Configurar ambiente
 
-## License
+```bash
+cp .env.example .env        # ou edite o .env existente
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+O `.env` já está configurado com SQLite e Mail log — não é necessário nenhuma configuração extra para rodar em desenvolvimento.
+
+### 4. Criar o banco
+
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
+
+### 5. Compilar assets
+
+```bash
+# Desenvolvimento (com hot reload)
+npm run dev
+
+# Produção
+npm run build
+```
+
+### 6. Subir o servidor
+
+```bash
+php artisan serve
+```
+
+Acesse: **http://localhost:8000**
+
+---
+
+## Rotas
+
+| Método | URL | Descrição |
+|--------|-----|-----------|
+| `GET` | `/` | Landing page |
+| `POST` | `/contato` | Submissão do formulário |
+| `GET` | `/admin/login` | Login do painel |
+| `POST` | `/admin/login` | Autenticação |
+| `GET` | `/admin/leads` | Painel de leads |
+| `PATCH` | `/admin/leads/{id}/status` | Atualizar status do lead |
+| `DELETE` | `/admin/leads/{id}` | Remover lead |
+
+---
+
+## Painel Admin
+
+Acesse `/admin` — será redirecionado para `/admin/login`.
+
+**Senha padrão:** definida em `.env` → `ADMIN_PASSWORD=viaresolve@2026`
+
+Funcionalidades do painel:
+- Cards de métricas (total, novos, contatados, encerrados)
+- Tabela de leads com busca e filtro por status
+- Atualização de status inline (sem recarregar página)
+- Exclusão de leads
+- Paginação
+
+---
+
+## E-mails
+
+O projeto usa `MAIL_MAILER=log` por padrão. Todos os e-mails são gravados em:
+
+```
+storage/logs/laravel.log
+```
+
+Para usar SMTP em produção, atualize as variáveis `MAIL_*` no `.env`.
+
+---
+
+## Seções da landing
+
+| Seção | ID | Descrição |
+|-------|----|-----------|
+| Navbar | — | Fixa, glassmorphism ao rolar |
+| Hero | `#inicio` | Fullscreen com imagem de fundo e parallax |
+| Métricas | `#resultados` | 4 cards com countup animado |
+| Soluções | `#solucoes` | 4 cards de serviço |
+| Quem somos | `#quem-somos` | 2 colunas com números |
+| Ticker | — | Marquee animado |
+| CNH cassada | `#cnh-cassada` | Seção de problema/benefícios |
+| Depoimentos | `#depoimentos` | 3 cards de clientes |
+| Contato | `#contato` | Formulário de captura de lead |
+| Footer | — | Informações de contato |
+
+---
+
+## Animações
+
+- **AOS** — implementado via `IntersectionObserver` nativo (sem dependência externa)
+- **Countup** — números sobem de 0 ao valor final com easing `easeOutExpo`
+- **Ticker marquee** — CSS animation loop infinito
+- **Navbar** — transição glassmorphism ao ultrapassar 40px de scroll
+- **Hero scroll arrow** — animação `floatY` em loop
+
+---
+
+## Feito por
+
+**Caio M Abra**
+Entre em contato: **+55 11 99847-9359**
