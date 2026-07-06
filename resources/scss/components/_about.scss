@@ -1,0 +1,107 @@
+@use '../base/variables' as *;
+// ─── About ────────────────────────────────────────────────────────────────────
+.about {
+    padding: $spacing-4xl 0;
+    background: $color-white;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-4xl;
+        align-items: center;
+
+        @media (max-width: $bp-lg) {
+            grid-template-columns: 1fr;
+            gap: $spacing-2xl;
+        }
+    }
+
+    &__left {
+        .section-title { margin-bottom: $spacing-xl; }
+    }
+
+    &__benefits {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-lg;
+        margin-bottom: $spacing-xl;
+    }
+
+    &__benefit {
+        display: flex;
+        gap: $spacing-md;
+        align-items: flex-start;
+
+        p {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+            line-height: 1.6;
+            margin-top: $spacing-xs;
+        }
+
+        strong {
+            font-size: $font-size-base;
+            font-weight: 700;
+            color: $color-dark;
+        }
+
+        &-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: $radius-md;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+
+            &--yellow {
+                background: rgba(245, 158, 11, 0.1);
+                color: $color-yellow;
+            }
+
+            &--blue {
+                background: rgba(37, 99, 235, 0.1);
+                color: $color-primary;
+            }
+        }
+    }
+
+    &__right {
+        p {
+            font-size: $font-size-base;
+            color: $color-text-muted;
+            line-height: 1.75;
+
+            & + p { margin-top: $spacing-md; }
+        }
+    }
+
+    &__numbers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: $spacing-md;
+        margin-top: $spacing-xl;
+        padding-top: $spacing-xl;
+        border-top: 1px solid $color-gray-200;
+    }
+
+    &__number-item {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+    }
+
+    &__number-value {
+        font-size: $font-size-2xl;
+        font-weight: 900;
+        color: $color-primary;
+        letter-spacing: -0.03em;
+    }
+
+    &__number-label {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        font-weight: 500;
+    }
+}

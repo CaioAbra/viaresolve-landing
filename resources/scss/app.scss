@@ -1,0 +1,20 @@
+// ─── ViaResolve — app.scss ────────────────────────────────────────────────────
+// Ordem: variáveis → reset → animações → componentes
+
+// Base
+@use 'base/variables' as *;
+@use 'base/reset';
+@use 'base/animations';
+
+// Componentes
+@use 'components/buttons';
+@use 'components/navbar';
+@use 'components/hero';
+@use 'components/stats';
+@use 'components/solutions';
+@use 'components/about';
+@use 'components/ticker';
+@use 'components/problem';
+@use 'components/testimonials';
+@use 'components/contact';
+@use 'components/footer';

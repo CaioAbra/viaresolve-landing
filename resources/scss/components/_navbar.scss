@@ -1,0 +1,148 @@
+@use '../base/variables' as *;
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-navbar;
+    padding: 0 $container-pad;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    transition: background $transition-slow, box-shadow $transition-slow, backdrop-filter $transition-slow;
+    animation: navbarSlideIn 0.5s ease forwards;
+
+    // Sticky scrolled state (adicionado via JS)
+    &.is-scrolled {
+        background: rgba(13, 27, 42, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    &__container {
+        max-width: $container-max;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xl;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        text-decoration: none;
+        flex-shrink: 0;
+
+        &-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.5));
+        }
+
+        &-text {
+            font-size: $font-size-lg;
+            font-weight: 600;
+            color: $color-white;
+            letter-spacing: -0.02em;
+
+            strong {
+                font-weight: 800;
+                color: $color-primary-light;
+            }
+        }
+    }
+
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: $spacing-lg;
+        margin-left: auto;
+
+        @media (max-width: $bp-md) {
+            display: none;
+            position: fixed;
+            top: 68px;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            background: rgba(13, 27, 42, 0.98);
+            backdrop-filter: blur(12px);
+            padding: $spacing-lg;
+            gap: $spacing-md;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+            &.is-open {
+                display: flex;
+                animation: fadeIn 0.2s ease;
+            }
+        }
+    }
+
+    &__link {
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8);
+        transition: color $transition-fast;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: $color-primary-light;
+            transform: scaleX(0);
+            transition: transform $transition-base;
+            border-radius: $radius-full;
+        }
+
+        &:hover {
+            color: $color-white;
+            &::after { transform: scaleX(1); }
+        }
+    }
+
+    &__cta {
+        margin-left: $spacing-md;
+        flex-shrink: 0;
+
+        @media (max-width: $bp-md) { display: none; }
+    }
+
+    &__toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        margin-left: auto;
+        padding: 6px;
+        border-radius: $radius-sm;
+        transition: background $transition-fast;
+
+        &:hover { background: rgba(255, 255, 255, 0.1); }
+
+        span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: $color-white;
+            border-radius: $radius-full;
+            transition: transform $transition-base, opacity $transition-base;
+        }
+
+        &.is-open {
+            span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            span:nth-child(2) { opacity: 0; }
+            span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        }
+
+        @media (max-width: $bp-md) { display: flex; }
+    }
+}

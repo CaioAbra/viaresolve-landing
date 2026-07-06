@@ -1,0 +1,85 @@
+@use 'variables' as *;
+// ─── Reset & Base ────────────────────────────────────────────────────────────
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: $font-family;
+    color: $color-text;
+    background-color: $color-white;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+// ─── Container ────────────────────────────────────────────────────────────────
+.container {
+    max-width: $container-max;
+    margin: 0 auto;
+    padding: 0 $container-pad;
+}
+
+// ─── Helpers de texto ─────────────────────────────────────────────────────────
+.text-primary { color: $color-primary; }
+
+.section-label {
+    font-size: $font-size-xs;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-primary;
+    margin-bottom: $spacing-sm;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &--center { justify-content: center; }
+    &--light   { color: rgba(255, 255, 255, 0.6); }
+
+    &__icon { font-size: 1rem; }
+}
+
+.section-title {
+    font-size: clamp($font-size-2xl, 4vw, $font-size-4xl);
+    font-weight: 800;
+    line-height: 1.2;
+    color: $color-dark;
+    margin-bottom: $spacing-lg;
+
+    &--center { text-align: center; }
+}

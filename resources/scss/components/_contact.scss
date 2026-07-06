@@ -1,0 +1,137 @@
+@use '../base/variables' as *;
+// ─── Contact / Form ───────────────────────────────────────────────────────────
+.contact {
+    padding: $spacing-4xl 0;
+    background: linear-gradient(135deg, $color-dark-3 0%, $color-dark-2 100%);
+    position: relative;
+    overflow: hidden;
+
+    // Decoração de fundo
+    &::before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: $radius-full;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+        top: -200px;
+        right: -200px;
+        pointer-events: none;
+    }
+
+    &__grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: $spacing-4xl;
+        align-items: center;
+
+        @media (max-width: $bp-lg) {
+            grid-template-columns: 1fr;
+            gap: $spacing-2xl;
+        }
+    }
+
+    &__title {
+        font-size: clamp($font-size-2xl, 3.5vw, $font-size-4xl);
+        font-weight: 800;
+        line-height: 1.2;
+        color: $color-white;
+        letter-spacing: -0.02em;
+        margin-bottom: $spacing-md;
+
+        span {
+            color: $color-primary-light;
+        }
+    }
+
+    &__subtitle {
+        font-size: $font-size-base;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.6;
+        margin-bottom: $spacing-xl;
+    }
+
+    &__right {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: $radius-xl;
+        padding: $spacing-2xl;
+        backdrop-filter: blur(8px);
+    }
+
+    &__success {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: #6EE7B7;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        padding: $spacing-md;
+        border-radius: $radius-md;
+        margin-bottom: $spacing-lg;
+    }
+
+    &__security {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        font-size: $font-size-xs;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: $spacing-md;
+        justify-content: center;
+    }
+}
+
+// ─── Form ─────────────────────────────────────────────────────────────────────
+.contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    &.has-error .form-input {
+        border-color: rgba(239, 68, 68, 0.6);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+}
+
+.form-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: $radius-sm;
+    color: $color-white;
+    font-size: $font-size-sm;
+    font-family: $font-family;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color $transition-fast, box-shadow $transition-fast, background $transition-fast;
+
+    &::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+    &:focus {
+        border-color: rgba(37, 99, 235, 0.7);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-error {
+    font-size: $font-size-xs;
+    color: #FCA5A5;
+    font-weight: 500;
+}

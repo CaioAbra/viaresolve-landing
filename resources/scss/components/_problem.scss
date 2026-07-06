@@ -1,0 +1,147 @@
+@use '../base/variables' as *;
+// ─── Problem Section ──────────────────────────────────────────────────────────
+.problem {
+    padding: $spacing-4xl 0;
+    background: $color-off-white;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-4xl;
+        align-items: center;
+
+        @media (max-width: $bp-lg) {
+            grid-template-columns: 1fr;
+            gap: $spacing-2xl;
+        }
+    }
+
+    &__content {
+        .section-title { margin-bottom: $spacing-md; }
+    }
+
+    &__desc {
+        font-size: $font-size-base;
+        color: $color-text-muted;
+        line-height: 1.75;
+        margin-bottom: $spacing-xl;
+    }
+
+    &__benefits {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-lg;
+        margin-bottom: $spacing-xl;
+    }
+
+    &__benefit {
+        display: flex;
+        gap: $spacing-md;
+        align-items: flex-start;
+
+        p {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+            line-height: 1.6;
+            margin-top: $spacing-xs;
+        }
+
+        strong {
+            font-size: $font-size-base;
+            font-weight: 700;
+            color: $color-dark;
+        }
+
+        &-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: $radius-md;
+            background: rgba(37, 99, 235, 0.10);
+            color: $color-primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        flex-wrap: wrap;
+    }
+
+    // Visual / Placeholder decorativo
+    &__visual {
+        position: relative;
+
+        @media (max-width: $bp-lg) { display: none; }
+    }
+
+    &__visual-inner {
+        position: relative;
+        height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    // Retângulos decorativos — emula os elementos da referência
+    &__visual-decor {
+        position: absolute;
+        border-radius: $radius-md;
+
+        &--1 {
+            width: 220px;
+            height: 280px;
+            background: linear-gradient(135deg, $color-primary, $color-dark-2);
+            top: 20px;
+            right: 0;
+            opacity: 0.85;
+            border-radius: $radius-lg;
+        }
+
+        &--2 {
+            width: 180px;
+            height: 200px;
+            background: $color-primary-light;
+            bottom: 10px;
+            right: 60px;
+            opacity: 0.15;
+            border-radius: $radius-lg;
+        }
+    }
+
+    &__visual-card {
+        position: relative;
+        z-index: 2;
+        background: $color-white;
+        border-radius: $radius-lg;
+        padding: $spacing-xl;
+        box-shadow: $shadow-lg;
+        text-align: center;
+        animation: floatY 4s ease-in-out infinite;
+
+        p { font-size: $font-size-sm; color: $color-text-muted; line-height: 1.5; }
+        strong { color: $color-dark; }
+    }
+
+    &__visual-badge {
+        position: absolute;
+        bottom: 40px;
+        left: -16px;
+        z-index: 3;
+        background: $color-dark;
+        color: $color-white;
+        font-size: $font-size-xs;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: $radius-full;
+        box-shadow: $shadow-md;
+        white-space: nowrap;
+
+        span { color: $color-primary-light; font-weight: 700; }
+    }
+}

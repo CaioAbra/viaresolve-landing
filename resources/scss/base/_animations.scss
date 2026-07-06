@@ -1,0 +1,71 @@
+@use 'variables' as *;
+// ─── Keyframes ────────────────────────────────────────────────────────────────
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes tickerScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.05); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+}
+
+@keyframes navbarSlideIn {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+
+// ─── AOS — data-aos simples via CSS (sem lib externa) ─────────────────────────
+[data-aos] {
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-duration: 0.6s;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &[data-aos="fade-up"]    { transform: translateY(28px); }
+    &[data-aos="fade-down"]  { transform: translateY(-28px); }
+    &[data-aos="fade-left"]  { transform: translateX(28px); }
+    &[data-aos="fade-right"] { transform: translateX(-28px); }
+    &[data-aos="fade-in"]    { transform: none; }
+
+    &[data-aos-delay="80"]  { transition-delay: 80ms; }
+    &[data-aos-delay="100"] { transition-delay: 100ms; }
+    &[data-aos-delay="150"] { transition-delay: 150ms; }
+    &[data-aos-delay="200"] { transition-delay: 200ms; }
+    &[data-aos-delay="300"] { transition-delay: 300ms; }
+    &[data-aos-delay="400"] { transition-delay: 400ms; }
+
+    &.aos-animate {
+        opacity: 1;
+        transform: none !important;
+    }
+}

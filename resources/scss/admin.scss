@@ -1,0 +1,457 @@
+// ─── ViaResolve Admin — admin.scss ────────────────────────────────────────────
+@use 'base/variables' as *;
+
+// ─── Reset mínimo ─────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+body {
+    font-family: $font-family;
+    background: $color-gray-100;
+    color: $color-text;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, select, textarea { font-family: inherit; font-size: inherit; }
+
+// ─── Admin Layout ─────────────────────────────────────────────────────────────
+.admin-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
+.admin-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: $color-dark;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+
+    @media (max-width: 768px) {
+        width: 64px;
+
+        .admin-sidebar__logo span,
+        .admin-sidebar__link span { display: none; }
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+
+        span {
+            font-size: 1rem;
+            font-weight: 600;
+            color: $color-white;
+
+            strong { font-weight: 800; color: $color-primary-light; }
+        }
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        flex: 1;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        padding: 0.625rem 0.875rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(255,255,255,0.6);
+        transition: all 0.2s;
+
+        &:hover {
+            background: rgba(255,255,255,0.07);
+            color: $color-white;
+        }
+
+        &.active {
+            background: rgba(37,99,235,0.2);
+            color: $color-primary-light;
+        }
+
+        &--logout {
+            width: 100%;
+            color: rgba(255,255,255,0.4);
+            &:hover { color: #FCA5A5; background: rgba(239,68,68,0.1); }
+        }
+    }
+
+    &__logout { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); }
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+.admin-main {
+    flex: 1;
+    margin-left: 220px;
+    padding: 2rem;
+    min-height: 100vh;
+
+    @media (max-width: 768px) { margin-left: 64px; padding: 1rem; }
+}
+
+// ─── Topbar ───────────────────────────────────────────────────────────────────
+.admin-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: $color-dark;
+        letter-spacing: -0.02em;
+    }
+
+    &__date {
+        font-size: 0.8125rem;
+        color: $color-text-muted;
+    }
+}
+
+// ─── Alerts ───────────────────────────────────────────────────────────────────
+.admin-alert {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+
+    &--success {
+        background: rgba(16,185,129,0.1);
+        border: 1px solid rgba(16,185,129,0.25);
+        color: #059669;
+    }
+
+    &--error {
+        background: rgba(239,68,68,0.08);
+        border: 1px solid rgba(239,68,68,0.2);
+        color: #DC2626;
+    }
+}
+
+// ─── Stats Cards ──────────────────────────────────────────────────────────────
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 480px) { grid-template-columns: 1fr 1fr; }
+}
+
+.admin-stat-card {
+    background: $color-white;
+    border: 1px solid $color-gray-200;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: $shadow-sm;
+
+    &__number {
+        display: block;
+        font-size: 2rem;
+        font-weight: 900;
+        color: $color-dark;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        margin-bottom: 0.375rem;
+    }
+
+    &__label {
+        font-size: 0.8125rem;
+        color: $color-text-muted;
+        font-weight: 500;
+    }
+
+    &--blue  .admin-stat-card__number { color: $color-primary; }
+    &--yellow .admin-stat-card__number { color: $color-yellow; }
+    &--green  .admin-stat-card__number { color: $color-green; }
+}
+
+// ─── Filters ──────────────────────────────────────────────────────────────────
+.admin-filters {
+    margin-bottom: 1rem;
+
+    &__form {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}
+
+.admin-input, .admin-select {
+    background: $color-white;
+    border: 1px solid $color-gray-200;
+    border-radius: 8px;
+    padding: 0.5625rem 0.875rem;
+    font-size: 0.875rem;
+    color: $color-text;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+        border-color: $color-primary;
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+}
+
+.admin-input { min-width: 260px; }
+.admin-select { min-width: 160px; }
+
+// ─── Botões admin ─────────────────────────────────────────────────────────────
+.admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5625rem 1.125rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+
+    &--primary {
+        background: $color-primary;
+        color: $color-white;
+        &:hover { background: $color-primary-dark; }
+    }
+
+    &--ghost {
+        background: transparent;
+        border: 1px solid $color-gray-200;
+        color: $color-text-muted;
+        &:hover { background: $color-gray-100; color: $color-text; }
+    }
+
+    &--full { width: 100%; justify-content: center; }
+}
+
+.admin-btn-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    &--danger {
+        color: $color-text-muted;
+        &:hover { background: rgba(239,68,68,0.1); color: $color-red; }
+    }
+}
+
+// ─── Table ────────────────────────────────────────────────────────────────────
+.admin-table-wrap {
+    background: $color-white;
+    border: 1px solid $color-gray-200;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+
+    thead tr {
+        background: $color-gray-100;
+        border-bottom: 1px solid $color-gray-200;
+    }
+
+    th {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: $color-text-muted;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 0.875rem 1rem;
+        border-bottom: 1px solid $color-gray-100;
+        color: $color-text;
+        vertical-align: middle;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:hover { background: rgba(37, 99, 235, 0.025); }
+
+    &__id { color: $color-text-muted; font-size: 0.8125rem; }
+    &__name { font-weight: 600; }
+    &__problem { max-width: 240px; color: $color-text-muted; }
+    &__date { font-size: 0.8125rem; color: $color-text-muted; line-height: 1.5; small { display: block; } }
+    &__empty { color: $color-gray-400; }
+
+    a:hover { color: $color-primary; text-decoration: underline; }
+}
+
+// ─── Status Select ────────────────────────────────────────────────────────────
+.admin-status-select {
+    border: none;
+    border-radius: 20px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s;
+
+    &--new       { background: rgba(37,99,235,0.1); color: $color-primary; }
+    &--contacted { background: rgba(245,158,11,0.1); color: #D97706; }
+    &--closed    { background: rgba(16,185,129,0.1); color: #059669; }
+}
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
+.admin-pagination {
+    margin-top: 1.25rem;
+    display: flex;
+    justify-content: flex-end;
+
+    nav { display: flex; gap: 0.5rem; align-items: center; }
+
+    a, span {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.375rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.8125rem;
+        border: 1px solid $color-gray-200;
+        color: $color-text-muted;
+        transition: all 0.15s;
+    }
+
+    a:hover { background: $color-primary; color: $color-white; border-color: $color-primary; }
+}
+
+// ─── Empty State ──────────────────────────────────────────────────────────────
+.admin-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    gap: 1rem;
+
+    p { color: $color-text-muted; font-size: 0.9375rem; }
+}
+
+// ─── Login Page ───────────────────────────────────────────────────────────────
+.admin-login-page {
+    background: $color-dark;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-login {
+    width: 100%;
+    padding: 1.5rem;
+
+    &__card {
+        max-width: 400px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 2.5rem;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        margin-bottom: 1.5rem;
+
+        span {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: $color-white;
+            strong { color: $color-primary-light; font-weight: 800; }
+        }
+    }
+
+    h1 {
+        font-size: 1.375rem;
+        font-weight: 800;
+        color: $color-white;
+        margin-bottom: 0.375rem;
+    }
+
+    & > p, & p {
+        font-size: 0.875rem;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 1.5rem;
+    }
+
+    &__back {
+        display: block;
+        text-align: center;
+        margin-top: 1.25rem;
+        font-size: 0.8125rem;
+        color: rgba(255,255,255,0.4);
+        transition: color 0.2s;
+        &:hover { color: $color-primary-light; }
+    }
+}
+
+.admin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-bottom: 1rem;
+
+    label {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: rgba(255,255,255,0.6);
+    }
+
+    input {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        color: $color-white;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+
+        &::placeholder { color: rgba(255,255,255,0.3); }
+
+        &:focus {
+            border-color: rgba(37,99,235,0.7);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+        }
+    }
+}
